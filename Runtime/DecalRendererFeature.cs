@@ -5,22 +5,14 @@ namespace kTools.Decals
     sealed class DecalRendererFeature : ScriptableRendererFeature
     {
 #region Fields
-        static DecalRendererFeature s_Instance;
-        readonly DecalRenderPass m_RenderPass;
-#endregion
-
-#region Constructors
-        public DecalRendererFeature()
-        {
-            s_Instance = this;
-            m_RenderPass = new DecalRenderPass();
-        }
+        DecalRenderPass m_RenderPass;
 #endregion
 
 #region Initialization
         public override void Create()
         {
             name = "Decals";
+            m_RenderPass = new DecalRenderPass();
         }
 #endregion
         
