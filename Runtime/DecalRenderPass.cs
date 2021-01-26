@@ -30,7 +30,7 @@ namespace kTools.Decals
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
             // Profiling command
-            CommandBuffer cmd = CommandBufferPool.Get("Decals");
+            CommandBuffer cmd = CommandBufferPool.Get();
             using (new ProfilingScope(cmd, profilingSampler))
             {
                 ExecuteCommand(context, cmd);
@@ -56,6 +56,7 @@ namespace kTools.Decals
                 }
             }
             ExecuteCommand(context, cmd);
+            CommandBufferPool.Release(cmd);
         }
 #endregion
 
