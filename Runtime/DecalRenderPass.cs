@@ -31,12 +31,12 @@ namespace kTools.Decals
         {
             // Profiling command
             CommandBuffer cmd = CommandBufferPool.Get("Decals");
-            using (new ProfilingSample(cmd, "Decals"))
+            using (new ProfilingScope(cmd, profilingSampler))
             {
                 ExecuteCommand(context, cmd);
 
                 // Sorting
-                var decals = DecalSystem.decals.OrderBy(x => x.decalData.sortingOrder);
+                var decals = DecalSystem.decals.Where(x => x.decalData != null).OrderBy(x => x.decalData.sortingOrder); 
 
                 foreach(var decal in decals)
                 {
