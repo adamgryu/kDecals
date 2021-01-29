@@ -4,6 +4,7 @@
 // -------------------------------------
 // Includes
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+#include "Packages/com.kink3d.decals/ShaderLibrary/Core.hlsl"
 
 // -------------------------------------
 // Structs
@@ -132,7 +133,7 @@ half4 LitPassFragment(Varyings input) : SV_Target
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
     SurfaceData surfaceData;
-    InitializeStandardLitSurfaceData(input.positionPS, surfaceData);
+    InitializeStandardLitSurfaceData(input.positionPS.xy, surfaceData);
 
     InputData inputData;
     InitializeInputData(input, surfaceData.normalTS, inputData);

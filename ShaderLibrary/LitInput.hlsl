@@ -130,6 +130,7 @@ half3 SampleEmission(float4 positionPS)
 
 // -------------------------------------
 // SurfaceData
+
 struct SurfaceData
 {
     half3 albedo;
