@@ -36,7 +36,7 @@ namespace kTools.Decals
                 ExecuteCommand(context, cmd);
 
                 // Sorting
-                var decals = DecalSystem.decals.Where(x => x.decalData != null).OrderBy(x => x.decalData.sortingOrder); 
+                var decals = DecalSystem.decals.Where(x => x.decalData != null).OrderBy(x => x.decalData.sortingOrder); // Isn't this bad on garbage?
 
                 foreach(var decal in decals)
                 {
@@ -86,7 +86,9 @@ namespace kTools.Decals
             var planes = GeometryUtility.CalculateFrustumPlanes(camera);
             if(!GeometryUtility.TestPlanesAABB(planes, bounds))
                 return false;
-            
+
+            /* WARNING: Calling context.Cull() here generates a segfault, for some reason.
+
             // Get CullingParameters
             var cullingParameters = new ScriptableCullingParameters();
             if (!camera.TryGetCullingParameters(out cullingParameters))
@@ -99,8 +101,10 @@ namespace kTools.Decals
                 cullingParameters.SetCullingPlane(i, decal.clipPlanes[i]);
             }
 
-            // Culling Results
             cullingResults = context.Cull(ref cullingParameters);
+            */
+
+            cullingResults = renderingData.cullResults; // HACK: Just return whatever is in here for now...
             return true;
         }
 #endregion
