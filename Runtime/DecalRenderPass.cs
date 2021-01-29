@@ -88,6 +88,7 @@ namespace kTools.Decals
                 return false;
 
             /* WARNING: Calling context.Cull() here generates a segfault, for some reason.
+             * NOTE: Commenting this out is bad for performance I think... We'll render everything another time per decal.
 
             // Get CullingParameters
             var cullingParameters = new ScriptableCullingParameters();
